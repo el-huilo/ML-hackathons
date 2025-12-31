@@ -67,9 +67,11 @@ We implemented a stacked ensemble classifier with the following structure:
 
 ## Results
 
+Scoring Rules: 0.1 * O-set acc + 0.9 * C-set acc + additonal score for quality of team's report (0-6 points)
+
 The model achieved exceptional performance on the validation set:
 - **Closed-set accuracy:** ~0.876
-- **Open-set accuracy:** ~0.991
+- **Open-set accuracy:** ~0.991 (scoreboard 4th place before awards)
 
 Open-set comparisons with approaches:
 - Baseline, RandomForestClassifier alone: ~0.966
@@ -101,4 +103,5 @@ The solution is implemented in a single Jupyter notebook (`0try.ipynb`) with the
 Thanks to organizers, CSV files with labels for the open and closed sets were provided after the hackathon. This helped us learn PyTorch and TensorFlow using this example.
 
 *Since this was our first experience in ML, we made the mistake of leaving the train/test split in the actual solution.
+
 
