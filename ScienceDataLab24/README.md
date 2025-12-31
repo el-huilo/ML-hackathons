@@ -13,6 +13,11 @@ The goal of this project was to develop a machine learning model with highest po
 
 ## Dataset Description
 
+Datasets:
+- train (training and validation)
+- open (immediate validation after submission as a solution)
+- closed (validation after the hackathon award)
+
 The dataset is organized into two directories: `train` and `test`. Each directory contains 10 CSV files:
 - 9 files named `B**.csv` representing different spectral channels (B02, B03, B04, B05, B06, B07, B8A, B11, B12)
 - 1 file named `NDVI.csv` containing pre-calculated NDVI values
@@ -96,3 +101,4 @@ The solution is implemented in a single Jupyter notebook (`0try.ipynb`) with the
 Thanks to organizers, CSV files with labels for the open and closed sets were provided after the hackathon. This helped us learn PyTorch and TensorFlow using this example.
 
 *Since this was our first experience in ML, we made the mistake of leaving the train/test split in the actual solution.
+
