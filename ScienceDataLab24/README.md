@@ -7,18 +7,18 @@ Place: 3rd
 
 This repository contains the 3rd-place winning solution for a hackathon task focused on classifying 6 crop types using tabular data derived from Sentinel-2 satellite imagery. The solution leverages feature engineering and a stacked ensemble model to achieve high classification accuracy.
 
-## Project Overview
+## Task Overview
 
-The goal of this project was to develop a machine learning model with highest possible accuracy of classifying agricultural crops based on time-series spectral data from Sentinel-2 satellite channels. The dataset included 9 spectral bands and a pre-calculated NDVI index across 26 time points (days from the beginning of the year, 121-296).
+The task ivolved developing a machine learning model with highest possible accuracy of classifying agricultural crops based on time-series spectral data from Sentinel-2 satellite channels. The dataset included 9 spectral bands and a pre-calculated NDVI index across 26 time points (days from the beginning of the year, 121-296).
 
 ## Dataset Description
 
-Datasets:
-- train (training and validation)
-- open (immediate validation after submission as a solution)
-- closed (validation after the hackathon award)
+The dataset included four distinct splits:
+- Train: CSV files for training/validation
+- Open-set: Intermediate evaluation test CSV files during the hackathon
+- Closed-set: Final evaluation test CSV files (score is announced at the awards)
 
-The dataset is organized into two directories: `train` and `test`. Each directory contains 10 CSV files:
+Each dataset contains 10 CSV files:
 - 9 files named `B**.csv` representing different spectral channels (B02, B03, B04, B05, B06, B07, B8A, B11, B12)
 - 1 file named `NDVI.csv` containing pre-calculated NDVI values
 
@@ -41,7 +41,7 @@ We created multiple vegetation indices and combined features to capture complex 
 - NDSAVI (NDVI × MSAVI)
 - NDVIRE (NDVI × NDRE)
 - NDAWI (2NDVI × 2MSAVI × 3NDWI / 6)
-- 13 custom features (TEST1-TEST13) derived from mathematical combinations of core and combined indices with weighted coefficients
+- 13 custom features (TEST1-TEST13) derived from mathematical combinations of core and combined indices with weighted coefficients and biases
 
 ### Model Architecture
 We implemented a stacked ensemble classifier with the following structure:
@@ -61,19 +61,22 @@ We implemented a stacked ensemble classifier with the following structure:
 - Final estimator: `MLPClassifier` with increased hidden layers (800, 600, 200, 100, 100, 50, 50 neurons)
 
 ### Training Strategy
-- The model was trained on the 70% of training dataset*
+- The model was trained on the 70%* of training dataset
 - Feature importance analysis guided the selection of combined features
 - Hyperparameters were optimized empirically by comparing metrics with different configurations
 
 ## Results
 
-Scoring Rules: 0.1 * O-set acc + 0.9 * C-set acc + additonal score for quality of team's report (0-6 points)
+- **Open-set accuracy:** 99.1%
+- **Closed-set accuracy:** 87.6%
 
-The model achieved exceptional performance on the validation set:
-- **Closed-set accuracy:** ~0.876
-- **Open-set accuracy:** ~0.991 (scoreboard 4th place before awards)
+### Competition Scoring:
 
-Open-set comparisons with approaches:
+- Open/Closed set weighting: 10%/90%
+- Additional points for team's report quality: 5.5/6
+- Additional points for non-standard approach: 2.5/4
+
+Open-set comparison with approaches:
 - Baseline, RandomForestClassifier alone: ~0.966
 - MLPClassifier alone: ~0.976
 - Removing the Normalizer from preprocessing: ~0.986
@@ -83,9 +86,9 @@ Open-set comparisons with approaches:
 
 The solution is implemented in a single Jupyter notebook (`0try.ipynb`) with the following sections:
 
-1. **Dependencies Installation** - Installs required packages (scikit-learn, pandas, matplotlib, numpy)
+1. **Dependencies Installation** - Installs required packages
 2. **Data Loading** - Reads and preprocesses training and test data
-3. **Feature Engineering** - Calculates 13 vegetation indices and creates combined features
+3. **Feature Engineering** - Calculates vegetation indices and creates combined features
 4. **Model Pipeline** - Defines the preprocessing and stacking classifier pipeline
 5. **Training** - Trains the model on the complete training dataset
 6. **Prediction** - Generates predictions for test data and saves to CSV
@@ -102,6 +105,4 @@ The solution is implemented in a single Jupyter notebook (`0try.ipynb`) with the
 
 Thanks to organizers, CSV files with labels for the open and closed sets were provided after the hackathon. This helped us learn PyTorch and TensorFlow using this example.
 
-*Since this was our first experience in ML, we made the mistake of leaving the train/test split in the actual solution.
-
-
+*Since this was our first experience in ML, we made the mistake of leaving the train/test split in the actual submitted solution.
