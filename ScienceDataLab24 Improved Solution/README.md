@@ -16,7 +16,7 @@ The original solution (see `0try.ipynb` and the accompanying README) consisted o
   - Open‑set accuracy: **99.1%**
   - Closed‑set accuracy: **87.6%**
 
-The large gap between open‑set and closed‑set performance suggested overfittinorg  insufficient generalisation.
+The large gap between open‑set and closed‑set performance suggested overfitting or insufficient generalisation.
 
 ## Improved Approach (Deep Learning with Learnable Imputation)
 
@@ -108,5 +108,6 @@ The closed‑set accuracy jumped from 87.6% to 99.7%, nearly eliminating the pre
    The position of batch normalisation layers highly matters (before, between and after linear layer and activation). Despite residual blocks are intended to be stacked, in this case more than 1 leads to accuracy degradation.
 
 ## Conclusion
+
 
 The improved crop classification model demonstrates that a carefully designed deep neural network can outperform a complex feature‑engineering and stacking ensemble on tabular satellite data. The project served good enough as part of training in working with JAX and Flax/NNX.
